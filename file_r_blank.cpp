@@ -49,17 +49,24 @@ string File::updatefile(string fn){
     ofstream fout(nf);
     ifstream fin(fn);
     if(fout.fail()!=0 || fin.fail()!=0){
-        cout<<"Error\n";
+        cout<<"Updation unsucessfull\n";
         return fn;
     }
     else{
+        bool flag=false;
         fin.get(ch);
+        if(ch!=' '){
+            fout<<char(toupper(ch));
+            fin.get(ch);
+            flag=true;
+        }
         while(fin){
             if(ch==' '){
                 fout<<ch;
                 while(ch==' '){
                     fin.get(ch);
                 }
+                flag= true;
                 fout<<char(toupper(ch));
                 fin.get(ch);
             }
@@ -68,7 +75,7 @@ string File::updatefile(string fn){
                 fin.get(ch);
             }
         }
-        cout<<"New file created\n";
+        cout<<"New file created";
         fin.close();
         fout.close();
         return nf;
